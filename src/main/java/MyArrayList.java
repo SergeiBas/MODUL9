@@ -1,4 +1,3 @@
-import java.util.AbstractList;
 import java.util.Arrays;
 import java.util.Objects;
 
@@ -14,11 +13,16 @@ public class MyArrayList {
         index++;
     }
     public void remove(int index){
-        myList = Arrays.copyOf(myList, myList.length-1);
-        for (int i = 0; i < myList.length; i++) {
-            if(i == index) myList[i] = myList[i];
+        Object[] arr = new Object[myList.length-1];
+        int count = 0;
+        for (int i = 0; i < arr.length; i++) {
+            if(i == index) continue;
+            else {
+                arr[count] = myList[i];
+                count++;
+            }
         }
-
+        myList = Arrays.copyOf(arr, arr.length);
     }
     public void clear() {
         for (int i = 0; i < myList.length; i++)
@@ -40,7 +44,7 @@ public class MyArrayList {
         System.out.println(arrayList.get(1));
         System.out.println(arrayList.get(2));
         arrayList.remove(1);
-        System.out.println(arrayList.get(1));
+        System.out.println(arrayList.get(0));
         arrayList.clear();
         System.out.println(arrayList.get(0));
     }
