@@ -1,5 +1,3 @@
-import java.util.LinkedList;
-import java.util.Objects;
 import java.util.Optional;
 
 public class MyLinkedList {
@@ -36,19 +34,20 @@ public class MyLinkedList {
     }
     public void remove(int index){
         Node currentNext = head;
-        Node currentPrev = head;
         currentNext = currentNext.next;
         int count = 0;
         for (MyLinkedList.Node x = head; x != null; ) {
             MyLinkedList.Node next = x.next;
             if(index-1 == count) {
-                x.prev = currentPrev.prev;
                 x.next = currentNext.next;
+                size--;
+                break;
+            } else if(index == 0){
+                head = currentNext;
                 size--;
                 break;
             }
             currentNext = currentNext.next;
-            currentPrev = currentPrev.next;
             x = next;
             count++;
         }
@@ -106,7 +105,7 @@ public class MyLinkedList {
         sList.add(4);
         sList.display();
 
-        sList.remove(2);
+        sList.remove(3);
         sList.display();
 
         System.out.println(sList.size());
