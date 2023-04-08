@@ -1,4 +1,6 @@
 import java.util.LinkedList;
+import java.util.Objects;
+import java.util.Optional;
 
 public class MyLinkedList {
     private int size;
@@ -6,9 +8,12 @@ public class MyLinkedList {
     class Node{
         Object data;
         Node next;
+        Node prev;
+
         public Node(Object data) {
             this.data = data;
             this.next = null;
+            this.prev = null;
         }
     }
 
@@ -30,12 +35,29 @@ public class MyLinkedList {
         }
     }
     public void remove(int index){
-
+        Node currentNext = head;
+        Node currentPrev = head;
+        currentNext = currentNext.next;
+        int count = 0;
+        for (MyLinkedList.Node x = head; x != null; ) {
+            MyLinkedList.Node next = x.next;
+            if(index-1 == count) {
+                x.prev = currentPrev.prev;
+                x.next = currentNext.next;
+                size--;
+                break;
+            }
+            currentNext = currentNext.next;
+            currentPrev = currentPrev.next;
+            x = next;
+            count++;
+        }
     }
 
     public void clear() {
         for (MyLinkedList.Node x = head; x != null; ) {
             MyLinkedList.Node next = x.next;
+            x.prev = null;
             x.next = null;
             x.data = null;
             x = next;
@@ -47,11 +69,16 @@ public class MyLinkedList {
         return size;
     }
     public<E> E get(int index){
-        E res = null;
-        for (int i = 0; i < index; i++) {
-
+        Node current = head;
+        int count = 0;
+        while(true){
+            if(count == index){
+                return (E) current.data;
+            } else {
+                current = current.next;
+                count++;
+            }
         }
-        return res;
     }
 
     public void display() {
@@ -77,12 +104,15 @@ public class MyLinkedList {
         sList.add(2);
         sList.add(3);
         sList.add(4);
-
         sList.display();
+
+        sList.remove(2);
+        sList.display();
+
         System.out.println(sList.size());
+        System.out.println(Optional.ofNullable(sList.get(0)));
 
         sList.clear();
-
         sList.display();
 
     }
