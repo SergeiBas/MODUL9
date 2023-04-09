@@ -33,18 +33,5 @@ public class MyArrayList {
     public Object get(int index){
         return myList[index];
     }
-    public static void main(String[] args) {
-        MyArrayList arrayList = new MyArrayList();
-        arrayList.add("Hello");
-        arrayList.add("Im list");
-        arrayList.add("1");
-        System.out.println(arrayList.size());
-        System.out.println(arrayList.get(0));
-        System.out.println(arrayList.get(1));
-        System.out.println(arrayList.get(2));
-        arrayList.remove(1);
-        System.out.println(arrayList.get(0));
-        arrayList.clear();
-        System.out.println(arrayList.get(0));
-    }
+
 }
